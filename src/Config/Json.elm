@@ -7,5 +7,5 @@ import Json.Decode as Json
 modelDecoder : Json.Decoder Model
 modelDecoder =
     Json.map2 Model
-        (Json.string)
-        (Json.int)
+        (Json.field "node_name" Json.string)
+        (Json.field "value" Json.int)

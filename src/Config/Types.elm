@@ -4,7 +4,7 @@ import Http exposing (Error)
 
 
 type alias Model =
-    { node_name : String
+    { nodeName : String
     , value : Int
     }
 

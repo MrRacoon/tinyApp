@@ -1,9 +1,13 @@
 module View exposing (..)
 
 import Types exposing (Model, Msg(..))
+import Config.View as Config
 import Html exposing (Html, div, text)
 
 
 view : Model -> Html Msg
 view model =
-    div [] [ text "Hi" ]
+    div []
+        [ text "Hi"
+        , Html.map ConfigMsg (Config.view model.config)
+        ]

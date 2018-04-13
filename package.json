@@ -6,7 +6,7 @@
   "scripts": {
     "prebuild": "mkdir -p dist",
     "build": "elm-make --output=dist/app.js src/Main.elm",
-    "postbuild": "cp src/index.html dist/index.html",
+    "postbuild": "cp src/{index.html,data.json} dist/",
     "start": "http-server -p 8080 ./dist/"
   },
   "author": "",
