@@ -5,5 +5,6 @@ import Config.Json exposing (modelDecoder)
 import Http exposing (send, get)
 
 
+getConfig : Cmd Msg
 getConfig =
-    send LoadConfig <| get "/data.json" modelDecoder
+    send LoadConfig <| get "/config.json" modelDecoder

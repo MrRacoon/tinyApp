@@ -8,6 +8,5 @@ import Html exposing (Html, div, text)
 view : Model -> Html Msg
 view model =
     div []
-        [ text "Hi"
-        , Html.map ConfigMsg (Config.view model.config)
+        [ Html.map ConfigMsg (Config.view model.config)
         ]

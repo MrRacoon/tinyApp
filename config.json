@@ -1,0 +1,16 @@
+{
+  "config": {
+    "api_url": "http://api.com/api/v3/"
+  },
+  "feature_flags": {
+    "show_buying_tools": "true"
+  },
+  "localization": {
+    "page_title": {
+      "en": "Some App"
+    },
+    "welcome_msg": {
+      "en": "Welcome to some awesome application!"
+    }
+  }
+}

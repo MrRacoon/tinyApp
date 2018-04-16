@@ -4,6 +4,9 @@ import Types exposing (Model, Msg(..))
 import Config.State as Config
 import Platform.Sub as Sub
 import Platform.Cmd as Cmd
+import Debug exposing (log)
+import Constants exposing (wsUrl)
+import WebSocket exposing (listen)
 
 
 init : ( Model, Cmd Msg )
@@ -27,10 +30,17 @@ update msg model =
             in
                 { model | config = configState } ! []
 
+        ServerMsg str ->
+            let
+                _ =
+                    log "ServerMsg" str
+            in
+                model ! []
+
         _ ->
             model ! []
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    listen wsUrl ServerMsg

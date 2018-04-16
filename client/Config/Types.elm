@@ -1,11 +1,17 @@
 module Config.Types exposing (..)
 
 import Http exposing (Error)
+import Dict exposing (Dict)
+
+
+type alias StringDict =
+    Dict String String
 
 
 type alias Model =
-    { nodeName : String
-    , value : Int
+    { config : StringDict
+    , features : StringDict
+    , localization : Dict String StringDict
     }
 
 

@@ -4,12 +4,13 @@ import Config.Types exposing (Model, Msg(..))
 import Config.Rest exposing (getConfig)
 import Platform.Cmd as Cmd
 import Platform.Sub as Sub
+import Dict exposing (empty)
 import Debug exposing (log)
 
 
 init : ( Model, Cmd Msg )
 init =
-    Model "" 0 ! [ getConfig ]
+    Model empty empty empty ! [ getConfig ]
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
