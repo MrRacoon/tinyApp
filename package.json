@@ -1,15 +1,15 @@
 {
   "name": "tiny-app",
   "version": "1.0.0",
-  "description": "",
+  "description": "A dynamic app to showcase a hashicorp stack",
   "main": "index.js",
   "scripts": {
     "prebuild": "mkdir -p dist",
     "build": "elm-make --output=dist/app.js src/Main.elm",
     "postbuild": "cp src/{index.html,data.json} dist/",
-    "start": "http-server -p 8080 ./dist/"
+    "start": "http-server -p $APP_PORT ./dist/"
   },
-  "author": "",
+  "author": "Erik Sutherland <erik.sutherland@nike.com>",
   "license": "ISC",
   "dependencies": {
     "http-server": "^0.11.1"
