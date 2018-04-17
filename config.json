@@ -3,14 +3,16 @@
     "api_url": "http://api.com/api/v3/"
   },
   "feature_flags": {
-    "show_buying_tools": "true"
+    "show_welcome_msg": "true"
   },
   "localization": {
     "page_title": {
-      "en": "Some App"
+      "en": "Some App",
+      "es": "alguna aplicación"
     },
     "welcome_msg": {
-      "en": "Welcome to some awesome application!"
+      "en": "WaDaTa to some awesome application!",
+      "es": "WaDaTa a alguna aplicación increíble"
     }
   }
 }
