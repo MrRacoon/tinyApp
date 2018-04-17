@@ -29,9 +29,8 @@ wss.on('connection', ws => {
   console.log('CON: %s', ws.id)
   ws.on('message', message => {
     console.log('MSG: %s', message);
-    const msg = JSON.parse(message);
   });
-  ws.on('close', function diconnected(code, message) {
+  ws.on('close', (code, message) => {
     console.log('DIS: %s %s', code, message);
   });
 });
@@ -58,6 +57,7 @@ function readConfig () {
       console.log('Parse Success');
       return [msg];
     } catch (e) {
+      console.log('Parse Failure');
       console.error(e);
       return [];
     }

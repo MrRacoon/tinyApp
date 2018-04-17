@@ -3,8 +3,9 @@
     "api_url": "http://api.com/api/v3/"
   },
   "feature_flags": {
-    "show_welcome_msg": "false",
-    "bold_title": "false"
+    "show_welcome_msg": "true",
+    "show_content": "true",
+    "title_underline": "true"
   },
   "localization": {
     "page_title": {
@@ -13,7 +14,16 @@
     },
     "welcome_msg": {
       "en": "WaDaTa to some awesome application!",
-      "es": "WaDaTa a alguna aplicación increíble"
+      "es": "Wadata a alguna aplicación increíble"
+    },
+    "content": {
+      "en": "asdfjk",
+      "es": ""
     }
-  }
+  },
+  "layout": [
+    "title",
+    "welcome_msg",
+    "content"
+  ]
 }

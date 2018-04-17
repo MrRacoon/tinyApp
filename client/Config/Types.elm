@@ -16,6 +16,7 @@ type alias Model =
     { config : StringDict
     , features : BoolDict
     , localization : Dict String StringDict
+    , layout : List String
     }
 
 

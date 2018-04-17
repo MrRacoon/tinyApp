@@ -27,10 +27,11 @@ stringDictDecoder =
 
 modelDecoder : Json.Decoder Model
 modelDecoder =
-    Json.map3 Model
+    Json.map4 Model
         (Json.field "config" stringDictDecoder)
         (Json.field "feature_flags" <| Json.dict booleanDecoder)
         (Json.field "localization" <| Json.dict stringDictDecoder)
+        (Json.field "layout" <| Json.list Json.string)
 
 
 decodeModel : String -> Result String Model

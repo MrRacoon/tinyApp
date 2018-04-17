@@ -13,7 +13,7 @@ import Debug exposing (log)
 
 init : ( Model, Cmd Msg )
 init =
-    Model empty empty empty ! [ getConfig ]
+    Model empty empty empty [] ! [ getConfig ]
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -22,7 +22,7 @@ update msg model =
         LoadConfig (Err err) ->
             let
                 _ =
-                    log ("Load Error: " ++ toString err)
+                    log ("Load Error:") err
             in
                 model ! []
 
