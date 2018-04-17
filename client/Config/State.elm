@@ -1,8 +1,8 @@
 module Config.State exposing (..)
 
 import Config.Types exposing (Model, Msg(..))
-import Config.Rest exposing (getConfig)
 import Config.Json exposing (decodeModel)
+import Config.Rest exposing (getConfig)
 import Config.Constants exposing (wsUrl)
 import WebSocket exposing (listen)
 import Platform.Cmd as Cmd
@@ -19,6 +19,16 @@ init =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        LoadConfig (Err err) ->
+            let
+                _ =
+                    log ("Load Error: " ++ toString err)
+            in
+                model ! []
+
+        LoadConfig (Ok newModel) ->
+            newModel ! []
+
         ServerMsg str ->
             case decodeModel <| log "ServerModel" str of
                 Ok newModel ->
@@ -26,9 +36,6 @@ update msg model =
 
                 Err err ->
                     model ! []
-
-        _ ->
-            model ! []
 
 
 subscriptions : Model -> Sub Msg

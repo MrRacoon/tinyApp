@@ -22,21 +22,18 @@ const CONFIG =
 const wss = new WebSocketServer({ port: PORT });
 console.log('starting websockets server at %s on %s', HOST, PORT);
 
-
 let conId = 0;
 
-wss.on('connection', function connection(ws) {
+wss.on('connection', ws => {
   ws.id = conId++;
   console.log('CON: %s', ws.id)
-  conId = conId++;
-  ws.on('message', function incoming(message) {
+  ws.on('message', message => {
     console.log('MSG: %s', message);
     const msg = JSON.parse(message);
   });
   ws.on('close', function diconnected(code, message) {
     console.log('DIS: %s %s', code, message);
   });
-  ws.send(readConfig());
 });
 
 // =============================================================================
@@ -44,10 +41,9 @@ wss.on('connection', function connection(ws) {
 
 watch(CONFIG, { persistent: true }, (evt, name) => {
   if (evt === 'update') {
-    readConfig()
-      .map(config => {
-        sendToAll(config)
-      })
+    readConfig().map(
+      config => sendToAll(config)
+    );
   }
 })
 
@@ -74,7 +70,7 @@ function sendToOne(sock, msg) {
 
 function sendToAll(str) {
   console.log('S2A: %s', str)
-  wss.clients.forEach(function each(client) {
-    client.send(str);
-  });
+  wss.clients.forEach(client =>
+    client.send(str)
+  );
 }
