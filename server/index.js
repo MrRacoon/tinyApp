@@ -2,8 +2,10 @@
 
 const WebSocketServer = require('ws').Server;
 const fs = require('fs');
+const watch = require('node-watch');
 
 // =============================================================================
+// Configuration
 
 const PORT =
   process.env.SIMPLE_APP_PORT || 8081;
@@ -15,11 +17,11 @@ const CONFIG =
   process.env.SIMPLE_APP_CONFIG || `${__dirname}/../config.json`;
 
 // =============================================================================
+// Web socketeering
 
 const wss = new WebSocketServer({ port: PORT });
 console.log('starting websockets server at %s on %s', HOST, PORT);
 
-// =============================================================================
 
 let conId = 0;
 
@@ -38,6 +40,32 @@ wss.on('connection', function connection(ws) {
 });
 
 // =============================================================================
+// File watching
+
+watch(CONFIG, { persistent: true }, (evt, name) => {
+  if (evt === 'update') {
+    readConfig()
+      .map(config => {
+        sendToAll(config)
+      })
+  }
+})
+
+// =============================================================================
+// Utility
+
+function readConfig () {
+    try {
+      const str = fs.readFileSync(CONFIG, 'utf8');
+      console.log('Contents:', str);
+      const msg = JSON.stringify(JSON.parse(str));
+      console.log('Parse Success');
+      return [msg];
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
+}
 
 function sendToOne(sock, msg) {
   console.log('SND: %s %s', sock.id, msg)
@@ -50,18 +78,3 @@ function sendToAll(str) {
     client.send(str);
   });
 }
-
-// =============================================================================
-
-function readConfig() {
-  return fs.readFileSync(CONFIG, 'utf8');
-}
-
-fs.watch(CONFIG, { persistent: true }, (event, filename) => {
-  console.log('event', event);
-  console.log('filename', filename);
-  if (event === 'change') {
-    console.log('pushing new configs');
-    sendToAll(readConfig());
-  }
-});

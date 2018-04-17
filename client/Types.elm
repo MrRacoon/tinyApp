@@ -11,4 +11,3 @@ type alias Model =
 type Msg
     = Anything
     | ConfigMsg Config.Msg
-    | ServerMsg String

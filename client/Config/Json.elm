@@ -31,3 +31,8 @@ modelDecoder =
         (Json.field "config" stringDictDecoder)
         (Json.field "feature_flags" <| Json.dict booleanDecoder)
         (Json.field "localization" <| Json.dict stringDictDecoder)
+
+
+decodeModel : String -> Result String Model
+decodeModel =
+    Json.decodeString modelDecoder

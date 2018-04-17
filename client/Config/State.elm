@@ -2,6 +2,9 @@ module Config.State exposing (..)
 
 import Config.Types exposing (Model, Msg(..))
 import Config.Rest exposing (getConfig)
+import Config.Json exposing (decodeModel)
+import Config.Constants exposing (wsUrl)
+import WebSocket exposing (listen)
 import Platform.Cmd as Cmd
 import Platform.Sub as Sub
 import Dict exposing (empty)
@@ -16,21 +19,18 @@ init =
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        LoadConfig (Ok config) ->
-            let
-                _ =
-                    log "error" <| config
-            in
-                config ! []
+        ServerMsg str ->
+            case decodeModel <| log "ServerModel" str of
+                Ok newModel ->
+                    newModel ! []
 
-        LoadConfig (Err err) ->
-            let
-                _ =
-                    log "error" err
-            in
-                model ! []
+                Err err ->
+                    model ! []
+
+        _ ->
+            model ! []
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    Sub.none
+    listen wsUrl ServerMsg

@@ -1,4 +1,4 @@
-module Constants exposing (..)
+module Config.Constants exposing (..)
 
 
 wsHost : String

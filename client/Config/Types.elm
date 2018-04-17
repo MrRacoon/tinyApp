@@ -21,3 +21,4 @@ type alias Model =
 
 type Msg
     = LoadConfig (Result Error Model)
+    | ServerMsg String

@@ -3,7 +3,8 @@
     "api_url": "http://api.com/api/v3/"
   },
   "feature_flags": {
-    "show_welcome_msg": "true"
+    "show_welcome_msg": "false",
+    "bold_title": "false"
   },
   "localization": {
     "page_title": {
