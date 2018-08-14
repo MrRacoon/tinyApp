@@ -10,8 +10,10 @@ PKG_DIR     = pkg
 TAR_FILE    = $(PKG_DIR)/$(NAME).tar.bz
 MD5_FILE    = $(PKG_DIR)/$(NAME).md5
 
-NODE_MODULES = node_modules
+NODE_MODULES = ./node_modules
 ELM_STUFF    = elm-stuff
+
+ELM = elm-make
 
 .phony: all build clean tar client server dev
 
@@ -22,11 +24,11 @@ all: build
 build: clean app.js
 
 clean:
-	-rm app.js
+	-rm -rf app.js
 
 deps:
 	npm install
-	elm-make --yes
+	$(ELM) --yes
 
 tar: build
 	mkdir -p $(PKG_DIR)
@@ -36,7 +38,7 @@ tar: build
 ################################################################################
 
 app.js:
-	elm-make $(TARGET) --yes --output=app.js
+	$(ELM) $(TARGET) --yes --output=app.js
 
 ################################################################################
 
@@ -47,3 +49,7 @@ run-server:
 	node $(SERVER_FILE)
 
 dev: build client server
+
+################################################################################
+
+ci: build
